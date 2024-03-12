@@ -10,20 +10,38 @@ const Home = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('https://i-am-bored-gtfi.vercel.app/getData', {
-                type,
-                participants
-            });
-            const arr = response.data;
-            const result = arr[Math.floor(Math.random() * arr.length)]
-            console.log(result);
+        // try {
+        // const response = await axios.post('https://i-am-bored-gtfi.vercel.app/getData', {
+        //     type,
+        //     participants
+        // });
+        fetch("https://i-am-bored-gtfi.vercel.app/getData", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ type, participants })
+        })
+            .then((res) => {
+                if (!res.ok)
+                    throw err;
+                return res.json();
+            })
+            .then(data => {
+                const arr = response.data;
+                const result = arr[Math.floor(Math.random() * arr.length)]
+                console.log(result);
+                setData(result);
+            })
+            .catch((err) => {
+                console.log(err);
+                setError(err.message);
+            })
 
-            setData(result);
-        }
-        catch (err) {
-            setError(err.message);
-        }
+        // }
+        // catch (err) {
+        //     setError(err.message);
+        // }
     }
 
     return (
