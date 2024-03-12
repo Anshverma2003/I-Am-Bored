@@ -11,17 +11,17 @@ const Home = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/getData', {
+            const response = await axios.post('https://i-am-bored-gtfi.vercel.app/getData', {
                 type,
                 participants
             });
             const arr = response.data;
-            const result = arr[Math.floor(Math.random()*arr.length)]
+            const result = arr[Math.floor(Math.random() * arr.length)]
             console.log(result);
 
             setData(result);
         }
-        catch(err){
+        catch (err) {
             setError(err.message);
         }
     }
