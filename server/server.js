@@ -7,7 +7,10 @@ const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    // Add the "Content-Type" header to CORS headers
+    exposedHeaders: ["Content-Type"],
+}));
 
 app.post('/getData', async (req, res) => {
 
